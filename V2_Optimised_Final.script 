@@ -1,0 +1,629 @@
+%General Mission Analysis Tool(GMAT) Script
+%Created: 2024-12-19 10:30:12
+
+%----------------------------------------
+%---------- Spacecraft
+%----------------------------------------
+
+Create Spacecraft V2;
+GMAT V2.DateFormat = A1Gregorian;
+GMAT V2.Epoch = '29 Aug 1977 15:31:44.000';
+GMAT V2.CoordinateSystem = SunMJ2000Eq;
+GMAT V2.DisplayStateType = Cartesian;
+GMAT V2.X = 140338129.195645;
+GMAT V2.Y = -49650023.0373715;
+GMAT V2.Z = -18769218.8181521;
+GMAT V2.VX = 13.67017803493411;
+GMAT V2.VY = 32.1445333212957;
+GMAT V2.VZ = 17.44459419721442;
+GMAT V2.DryMass = 850;
+GMAT V2.Cd = 2.2;
+GMAT V2.Cr = 1.8;
+GMAT V2.DragArea = 15;
+GMAT V2.SRPArea = 1;
+GMAT V2.SPADDragScaleFactor = 1;
+GMAT V2.SPADSRPScaleFactor = 1;
+GMAT V2.AtmosDensityScaleFactor = 1;
+GMAT V2.ExtendedMassPropertiesModel = 'None';
+GMAT V2.NAIFId = -10000001;
+GMAT V2.NAIFIdReferenceFrame = -9000001;
+GMAT V2.OrbitColor = Red;
+GMAT V2.TargetColor = Teal;
+GMAT V2.OrbitErrorCovariance = [ 1e+70 0 0 0 0 0 ; 0 1e+70 0 0 0 0 ; 0 0 1e+70 0 0 0 ; 0 0 0 1e+70 0 0 ; 0 0 0 0 1e+70 0 ; 0 0 0 0 0 1e+70 ];
+GMAT V2.CdSigma = 1e+70;
+GMAT V2.CrSigma = 1e+70;
+GMAT V2.Id = 'SatId';
+GMAT V2.Attitude = CoordinateSystemFixed;
+GMAT V2.SPADSRPInterpolationMethod = Bilinear;
+GMAT V2.SPADSRPScaleFactorSigma = 1e+70;
+GMAT V2.SPADDragInterpolationMethod = Bilinear;
+GMAT V2.SPADDragScaleFactorSigma = 1e+70;
+GMAT V2.AtmosDensityScaleFactorSigma = 1e+70;
+GMAT V2.ModelFile = 'aura.3ds';
+GMAT V2.ModelOffsetX = 0;
+GMAT V2.ModelOffsetY = 0;
+GMAT V2.ModelOffsetZ = 0;
+GMAT V2.ModelRotationX = 0;
+GMAT V2.ModelRotationY = 0;
+GMAT V2.ModelRotationZ = 0;
+GMAT V2.ModelScale = 1;
+GMAT V2.AttitudeDisplayStateType = 'Quaternion';
+GMAT V2.AttitudeRateDisplayStateType = 'AngularVelocity';
+GMAT V2.AttitudeCoordinateSystem = EarthMJ2000Eq;
+GMAT V2.EulerAngleSequence = '321';
+
+Create Spacecraft InitSat;
+GMAT InitSat.DateFormat = UTCGregorian;
+GMAT InitSat.Epoch = '20 Aug 1977 15:32:32.182';
+GMAT InitSat.CoordinateSystem = SunMJ2000Eq;
+GMAT InitSat.DisplayStateType = Cartesian;
+GMAT InitSat.X = 132524768.6068663;       % km
+GMAT InitSat.Y = -66024387.85489973;      % km
+GMAT InitSat.Z = -27698957.09760745;      % km
+GMAT InitSat.VX = 16.44295765322942;      % km/s
+GMAT InitSat.VY = 30.97762840230931;      % km/s
+GMAT InitSat.VZ = 16.97960898171101;      % km/s
+GMAT InitSat.DryMass = 850;
+GMAT InitSat.Cd = 2.2;
+GMAT InitSat.Cr = 1.8;
+GMAT InitSat.DragArea = 15;
+GMAT InitSat.SRPArea = 1;
+GMAT InitSat.SPADDragScaleFactor = 1;
+GMAT InitSat.SPADSRPScaleFactor = 1;
+GMAT InitSat.AtmosDensityScaleFactor = 1;
+GMAT InitSat.ExtendedMassPropertiesModel = 'None';
+GMAT InitSat.NAIFId = -10011001;
+GMAT InitSat.NAIFIdReferenceFrame = -9011001;
+GMAT InitSat.OrbitColor = Green;
+GMAT InitSat.TargetColor = LightGray;
+GMAT InitSat.OrbitErrorCovariance = [ 1e+70 0 0 0 0 0 ; 0 1e+70 0 0 0 0 ; 0 0 1e+70 0 0 0 ; 0 0 0 1e+70 0 0 ; 0 0 0 0 1e+70 0 ; 0 0 0 0 0 1e+70 ];
+GMAT InitSat.CdSigma = 1e+70;
+GMAT InitSat.CrSigma = 1e+70;
+GMAT InitSat.Id = 'SatId';
+GMAT InitSat.Attitude = CoordinateSystemFixed;
+GMAT InitSat.SPADSRPInterpolationMethod = Bilinear;
+GMAT InitSat.SPADSRPScaleFactorSigma = 1e+70;
+GMAT InitSat.SPADDragInterpolationMethod = Bilinear;
+GMAT InitSat.SPADDragScaleFactorSigma = 1e+70;
+GMAT InitSat.AtmosDensityScaleFactorSigma = 1e+70;
+GMAT InitSat.ModelFile = 'aura.3ds';
+GMAT InitSat.ModelOffsetX = 0;
+GMAT InitSat.ModelOffsetY = 0;
+GMAT InitSat.ModelOffsetZ = 0;
+GMAT InitSat.ModelRotationX = 0;
+GMAT InitSat.ModelRotationY = 0;
+GMAT InitSat.ModelRotationZ = 0;
+GMAT InitSat.ModelScale = 1;
+GMAT InitSat.AttitudeDisplayStateType = 'Quaternion';
+GMAT InitSat.AttitudeRateDisplayStateType = 'AngularVelocity';
+GMAT InitSat.AttitudeCoordinateSystem = EarthMJ2000Eq;
+GMAT InitSat.EulerAngleSequence = '321';
+
+%----------------------------------------
+%---------- ForceModels
+%----------------------------------------
+
+Create ForceModel NearSaturn_ForceModel;
+GMAT NearSaturn_ForceModel.CentralBody = Saturn;
+GMAT NearSaturn_ForceModel.PointMasses = {Saturn, Sun};
+GMAT NearSaturn_ForceModel.Drag = None;
+GMAT NearSaturn_ForceModel.SRP = On;
+GMAT NearSaturn_ForceModel.RelativisticCorrection = On;
+GMAT NearSaturn_ForceModel.ErrorControl = RSSStep;
+GMAT NearSaturn_ForceModel.SRP.Flux = 1367;
+GMAT NearSaturn_ForceModel.SRP.SRPModel = Spherical;
+GMAT NearSaturn_ForceModel.SRP.Nominal_Sun = 149597870.691;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%----------------------------------------
+%---------- ForceModels
+%----------------------------------------
+
+Create ForceModel NearJupiterProp_ForceModel;
+GMAT NearJupiterProp_ForceModel.CentralBody = Jupiter;
+GMAT NearJupiterProp_ForceModel.PointMasses = {Earth, Jupiter, Luna, Mars, Mercury, Neptune, Pluto, Saturn, Sun, Uranus, Venus};
+GMAT NearJupiterProp_ForceModel.Drag = None;
+GMAT NearJupiterProp_ForceModel.SRP = On;
+GMAT NearJupiterProp_ForceModel.RelativisticCorrection = Off;
+GMAT NearJupiterProp_ForceModel.ErrorControl = RSSStep;
+GMAT NearJupiterProp_ForceModel.SRP.Flux = 1367;
+GMAT NearJupiterProp_ForceModel.SRP.SRPModel = Spherical;
+GMAT NearJupiterProp_ForceModel.SRP.Nominal_Sun = 149597870.691;
+
+Create ForceModel Interplanetary_Transfer_Prop_ForceModel;
+GMAT Interplanetary_Transfer_Prop_ForceModel.CentralBody = Sun;
+GMAT Interplanetary_Transfer_Prop_ForceModel.PointMasses = {Earth, Jupiter, Luna, Mars, Mercury, Neptune, Pluto, Saturn, Sun, Uranus, Venus};
+GMAT Interplanetary_Transfer_Prop_ForceModel.Drag = None;
+GMAT Interplanetary_Transfer_Prop_ForceModel.SRP = On;
+GMAT Interplanetary_Transfer_Prop_ForceModel.RelativisticCorrection = On;
+GMAT Interplanetary_Transfer_Prop_ForceModel.ErrorControl = RSSStep;
+GMAT Interplanetary_Transfer_Prop_ForceModel.SRP.Flux = 1367;
+GMAT Interplanetary_Transfer_Prop_ForceModel.SRP.SRPModel = Spherical;
+GMAT Interplanetary_Transfer_Prop_ForceModel.SRP.Nominal_Sun = 149597870.691;
+
+Create ForceModel NearEarth_ForceModel;
+GMAT NearEarth_ForceModel.CentralBody = Earth;
+GMAT NearEarth_ForceModel.PrimaryBodies = {Earth};
+GMAT NearEarth_ForceModel.PointMasses = {Luna, Sun};
+GMAT NearEarth_ForceModel.Drag = None;
+GMAT NearEarth_ForceModel.SRP = Off;
+GMAT NearEarth_ForceModel.RelativisticCorrection = Off;
+GMAT NearEarth_ForceModel.ErrorControl = RSSStep;
+GMAT NearEarth_ForceModel.GravityField.Earth.Degree = 4;
+GMAT NearEarth_ForceModel.GravityField.Earth.Order = 4;
+GMAT NearEarth_ForceModel.GravityField.Earth.StmLimit = 100;
+GMAT NearEarth_ForceModel.GravityField.Earth.PotentialFile = 'JGM2.cof';
+GMAT NearEarth_ForceModel.GravityField.Earth.TideModel = 'None';
+
+%----------------------------------------
+%---------- Propagators
+%----------------------------------------
+
+Create Propagator NearJupiterProp;
+GMAT NearJupiterProp.FM = NearJupiterProp_ForceModel;
+GMAT NearJupiterProp.Type = RungeKutta89;
+GMAT NearJupiterProp.InitialStepSize = 60;
+GMAT NearJupiterProp.Accuracy = 9.999999999999999e-12;
+GMAT NearJupiterProp.MinStep = 0.001;
+GMAT NearJupiterProp.MaxStep = 864000;
+GMAT NearJupiterProp.MaxStepAttempts = 50;
+GMAT NearJupiterProp.StopIfAccuracyIsViolated = true;
+
+Create Propagator Interplanetary_Transfer_Prop;
+GMAT Interplanetary_Transfer_Prop.FM = Interplanetary_Transfer_Prop_ForceModel;
+GMAT Interplanetary_Transfer_Prop.Type = RungeKutta89;
+GMAT Interplanetary_Transfer_Prop.InitialStepSize = 60;
+GMAT Interplanetary_Transfer_Prop.Accuracy = 9.999999999999999e-12;
+GMAT Interplanetary_Transfer_Prop.MinStep = 0.001;
+GMAT Interplanetary_Transfer_Prop.MaxStep = 160000;
+GMAT Interplanetary_Transfer_Prop.MaxStepAttempts = 50;
+GMAT Interplanetary_Transfer_Prop.StopIfAccuracyIsViolated = true;
+
+Create Propagator NearEarth;
+GMAT NearEarth.FM = NearEarth_ForceModel;
+GMAT NearEarth.Type = RungeKutta89;
+GMAT NearEarth.InitialStepSize = 60;
+GMAT NearEarth.Accuracy = 9.999999999999999e-12;
+GMAT NearEarth.MinStep = 0.001;
+GMAT NearEarth.MaxStep = 27000;
+GMAT NearEarth.MaxStepAttempts = 50;
+GMAT NearEarth.StopIfAccuracyIsViolated = true;
+
+%----------------------------------------
+%---------- Burns
+%----------------------------------------
+
+Create ImpulsiveBurn TCM_1;
+GMAT TCM_1.CoordinateSystem = Local;
+GMAT TCM_1.Origin = Earth;
+GMAT TCM_1.Axes = VNB;
+GMAT TCM_1.Element1 = 10;
+GMAT TCM_1.Element2 = 0;
+GMAT TCM_1.Element3 = 0;
+GMAT TCM_1.DecrementMass = false;
+GMAT TCM_1.Isp = 300;
+GMAT TCM_1.GravitationalAccel = 9.81;
+
+Create ImpulsiveBurn TCM_2;
+GMAT TCM_2.CoordinateSystem = Local;
+GMAT TCM_2.Origin = Earth;
+GMAT TCM_2.Axes = VNB;
+GMAT TCM_2.Element1 = 0;
+GMAT TCM_2.Element2 = 0;
+GMAT TCM_2.Element3 = 0;
+GMAT TCM_2.DecrementMass = false;
+GMAT TCM_2.Isp = 300;
+GMAT TCM_2.GravitationalAccel = 9.81;
+
+Create ImpulsiveBurn TCM_3;
+GMAT TCM_3.CoordinateSystem = Local;
+GMAT TCM_3.Origin = Earth;
+GMAT TCM_3.Axes = VNB;
+GMAT TCM_3.Element1 = 0;
+GMAT TCM_3.Element2 = 0;
+GMAT TCM_3.Element3 = 0;
+GMAT TCM_3.DecrementMass = false;
+GMAT TCM_3.Isp = 300;
+GMAT TCM_3.GravitationalAccel = 9.81;
+
+Create ImpulsiveBurn TCM_4;
+GMAT TCM_4.CoordinateSystem = Local;
+GMAT TCM_4.Origin = Earth;
+GMAT TCM_4.Axes = VNB;
+GMAT TCM_4.Element1 = 0;
+GMAT TCM_4.Element2 = 0;
+GMAT TCM_4.Element3 = 0;
+GMAT TCM_4.DecrementMass = false;
+GMAT TCM_4.Isp = 300;
+GMAT TCM_4.GravitationalAccel = 9.81;
+
+%----------------------------------------
+%---------- Coordinate Systems
+%----------------------------------------
+
+Create CoordinateSystem SunMJ2000Eq;
+GMAT SunMJ2000Eq.Origin = Sun;
+GMAT SunMJ2000Eq.Axes = MJ2000Eq;
+
+Create CoordinateSystem EarthMoonRot;
+GMAT EarthMoonRot.Origin = Earth;
+GMAT EarthMoonRot.Axes = ObjectReferenced;
+GMAT EarthMoonRot.XAxis = R;
+GMAT EarthMoonRot.ZAxis = N;
+GMAT EarthMoonRot.Primary = Earth;
+GMAT EarthMoonRot.Secondary = Luna;
+
+Create CoordinateSystem MoonInertial;
+GMAT MoonInertial.Origin = Luna;
+GMAT MoonInertial.Axes = BodyInertial;
+
+Create CoordinateSystem JupiterInertial;
+GMAT JupiterInertial.Origin = Jupiter;
+GMAT JupiterInertial.Axes = BodyInertial;
+
+Create CoordinateSystem EarthJupiterRot;
+GMAT EarthJupiterRot.Origin = Earth;
+GMAT EarthJupiterRot.Axes = ObjectReferenced;
+GMAT EarthJupiterRot.XAxis = R;
+GMAT EarthJupiterRot.ZAxis = N;
+GMAT EarthJupiterRot.Primary = Earth;
+GMAT EarthJupiterRot.Secondary = Jupiter;
+
+Create CoordinateSystem SaturnInertial;
+GMAT SaturnInertial.Origin = Saturn;
+GMAT SaturnInertial.Axes = BodyInertial;
+
+Create CoordinateSystem UranusInertial;
+GMAT UranusInertial.Origin = Uranus;
+GMAT UranusInertial.Axes = BodyInertial;
+
+Create CoordinateSystem NeptuneInertial;
+GMAT NeptuneInertial.Origin = Neptune;
+GMAT NeptuneInertial.Axes = BodyInertial;
+
+%----------------------------------------
+%---------- Solvers
+%----------------------------------------
+
+Create DifferentialCorrector DC1;
+GMAT DC1.ShowProgress = true;
+GMAT DC1.ReportStyle = Normal;
+GMAT DC1.ReportFile = 'DifferentialCorrectorDC1.data';
+GMAT DC1.MaximumIterations = 500;
+GMAT DC1.DerivativeMethod = ForwardDifference;
+GMAT DC1.Algorithm = NewtonRaphson;
+
+Create Yukon Yukon1;
+GMAT Yukon1.ShowProgress = true;
+GMAT Yukon1.ReportStyle = Debug;
+GMAT Yukon1.ReportFile = 'YukonYukon1.data';
+GMAT Yukon1.MaximumIterations = 200;
+GMAT Yukon1.UseCentralDifferences = false;
+GMAT Yukon1.FeasibilityTolerance = 10;
+GMAT Yukon1.HessianUpdateMethod = SelfScaledBFGS;
+GMAT Yukon1.MaximumFunctionEvals = 1000;
+GMAT Yukon1.OptimalityTolerance = 1e-05;
+GMAT Yukon1.FunctionTolerance = 1e-05;
+GMAT Yukon1.MaximumElasticWeight = 10000;
+
+%----------------------------------------
+%---------- Subscribers
+%----------------------------------------
+
+Create OrbitView JupiterInertialView;
+GMAT JupiterInertialView.SolverIterations = Current;
+GMAT JupiterInertialView.UpperLeft = [ 0.6347886347886348 -29.21091811414392 ];
+GMAT JupiterInertialView.Size = [ 0.3499653499653499 0.6265508684863523 ];
+GMAT JupiterInertialView.RelativeZOrder = 2108;
+GMAT JupiterInertialView.Maximized = false;
+GMAT JupiterInertialView.Add = {V2, Luna, Earth, Jupiter, Sun};
+GMAT JupiterInertialView.CoordinateSystem = JupiterInertial;
+GMAT JupiterInertialView.DrawObject = [ true true true true true ];
+GMAT JupiterInertialView.DataCollectFrequency = 1;
+GMAT JupiterInertialView.UpdatePlotFrequency = 50;
+GMAT JupiterInertialView.NumPointsToRedraw = 150;
+GMAT JupiterInertialView.ShowPlot = true;
+GMAT JupiterInertialView.MaxPlotPoints = 20000;
+GMAT JupiterInertialView.ShowLabels = true;
+GMAT JupiterInertialView.ViewPointReference = Jupiter;
+GMAT JupiterInertialView.ViewPointVector = [ 20000 20000 20000 ];
+GMAT JupiterInertialView.ViewDirection = Jupiter;
+GMAT JupiterInertialView.ViewScaleFactor = 100;
+GMAT JupiterInertialView.ViewUpCoordinateSystem = EarthMJ2000Eq;
+GMAT JupiterInertialView.ViewUpAxis = Z;
+GMAT JupiterInertialView.EclipticPlane = Off;
+GMAT JupiterInertialView.XYPlane = On;
+GMAT JupiterInertialView.WireFrame = Off;
+GMAT JupiterInertialView.Axes = On;
+GMAT JupiterInertialView.Grid = Off;
+GMAT JupiterInertialView.SunLine = Off;
+GMAT JupiterInertialView.UseInitialView = On;
+GMAT JupiterInertialView.StarCount = 7000;
+GMAT JupiterInertialView.EnableStars = On;
+GMAT JupiterInertialView.EnableConstellations = On;
+
+Create OrbitView DefaultOrbitView;
+GMAT DefaultOrbitView.SolverIterations = Current;
+GMAT DefaultOrbitView.UpperLeft = [ 0.000693000693000693 0.5186104218362283 ];
+GMAT DefaultOrbitView.Size = [ 0.6299376299376299 0.5880893300248139 ];
+GMAT DefaultOrbitView.RelativeZOrder = 2116;
+GMAT DefaultOrbitView.Maximized = false;
+GMAT DefaultOrbitView.Add = {V2, Earth, Mars, Jupiter, Neptune, Saturn, Uranus, Sun};
+GMAT DefaultOrbitView.CoordinateSystem = SunMJ2000Eq;
+GMAT DefaultOrbitView.DrawObject = [ true true true true true true true true ];
+GMAT DefaultOrbitView.DataCollectFrequency = 1;
+GMAT DefaultOrbitView.UpdatePlotFrequency = 50;
+GMAT DefaultOrbitView.NumPointsToRedraw = 0;
+GMAT DefaultOrbitView.ShowPlot = true;
+GMAT DefaultOrbitView.MaxPlotPoints = 20000;
+GMAT DefaultOrbitView.ShowLabels = true;
+GMAT DefaultOrbitView.ViewPointReference = Sun;
+GMAT DefaultOrbitView.ViewPointVector = Jupiter;
+GMAT DefaultOrbitView.ViewDirection = Sun;
+GMAT DefaultOrbitView.ViewScaleFactor = 1.5;
+GMAT DefaultOrbitView.ViewUpCoordinateSystem = SunMJ2000Eq;
+GMAT DefaultOrbitView.ViewUpAxis = Z;
+GMAT DefaultOrbitView.EclipticPlane = Off;
+GMAT DefaultOrbitView.XYPlane = On;
+GMAT DefaultOrbitView.WireFrame = Off;
+GMAT DefaultOrbitView.Axes = On;
+GMAT DefaultOrbitView.Grid = Off;
+GMAT DefaultOrbitView.SunLine = Off;
+GMAT DefaultOrbitView.UseInitialView = On;
+GMAT DefaultOrbitView.StarCount = 7000;
+GMAT DefaultOrbitView.EnableStars = On;
+GMAT DefaultOrbitView.EnableConstellations = On;
+
+Create OrbitView SaturnIntertialView;
+GMAT SaturnIntertialView.SolverIterations = Current;
+GMAT SaturnIntertialView.UpperLeft = [ 0.6361746361746362 0.05583126550868486 ];
+GMAT SaturnIntertialView.Size = [ 0.3264033264033264 0.9305210918114144 ];
+GMAT SaturnIntertialView.RelativeZOrder = 2112;
+GMAT SaturnIntertialView.Maximized = false;
+GMAT SaturnIntertialView.Add = {V2, Saturn};
+GMAT SaturnIntertialView.CoordinateSystem = SaturnInertial;
+GMAT SaturnIntertialView.DrawObject = [ true true ];
+GMAT SaturnIntertialView.DataCollectFrequency = 1;
+GMAT SaturnIntertialView.UpdatePlotFrequency = 50;
+GMAT SaturnIntertialView.NumPointsToRedraw = 0;
+GMAT SaturnIntertialView.ShowPlot = true;
+GMAT SaturnIntertialView.MaxPlotPoints = 20000;
+GMAT SaturnIntertialView.ShowLabels = true;
+GMAT SaturnIntertialView.ViewPointReference = Saturn;
+GMAT SaturnIntertialView.ViewPointVector = [ 20000 20000 20000 ];
+GMAT SaturnIntertialView.ViewDirection = Saturn;
+GMAT SaturnIntertialView.ViewScaleFactor = 50;
+GMAT SaturnIntertialView.ViewUpCoordinateSystem = EarthMJ2000Eq;
+GMAT SaturnIntertialView.ViewUpAxis = Z;
+GMAT SaturnIntertialView.EclipticPlane = Off;
+GMAT SaturnIntertialView.XYPlane = On;
+GMAT SaturnIntertialView.WireFrame = Off;
+GMAT SaturnIntertialView.Axes = On;
+GMAT SaturnIntertialView.Grid = Off;
+GMAT SaturnIntertialView.SunLine = Off;
+GMAT SaturnIntertialView.UseInitialView = On;
+GMAT SaturnIntertialView.StarCount = 7000;
+GMAT SaturnIntertialView.EnableStars = On;
+GMAT SaturnIntertialView.EnableConstellations = On;
+
+Create ReportFile DefaultReportFile;
+GMAT DefaultReportFile.SolverIterations = Current;
+GMAT DefaultReportFile.UpperLeft = [ 0 0 ];
+GMAT DefaultReportFile.Size = [ 0 0 ];
+GMAT DefaultReportFile.RelativeZOrder = 0;
+GMAT DefaultReportFile.Maximized = false;
+GMAT DefaultReportFile.Filename = 'C:\users\crossover\Documents\GitHub\Voyager2_GMAT\deltaVreportfile_Optimise_(Using_OptimiseLoop).txt';
+GMAT DefaultReportFile.Precision = 16;
+GMAT DefaultReportFile.WriteHeaders = true;
+GMAT DefaultReportFile.LeftJustify = On;
+GMAT DefaultReportFile.ZeroFill = Off;
+GMAT DefaultReportFile.FixedWidth = true;
+GMAT DefaultReportFile.Delimiter = ' ';
+GMAT DefaultReportFile.ColumnWidth = 23;
+GMAT DefaultReportFile.WriteReport = true;
+
+%----------------------------------------
+%---------- Arrays, Variables, Strings
+%----------------------------------------
+Create Variable RAAN AOP DeltaV_TCM_1 DeltaV_TCM_2 DeltaV_TCM_3 DeltaV_TCM_4;
+GMAT DeltaV_TCM_1 = 0;
+GMAT DeltaV_TCM_2 = 0;
+GMAT DeltaV_TCM_3 = 0;
+GMAT DeltaV_TCM_4 = 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%----------------------------------------
+%---------- Mission Sequence
+%----------------------------------------
+BeginMissionSequence;
+
+GMAT 'InitSat = V2' InitSat = V2;
+
+%  This target loop varies the injection orbit RAAN and AOP to align the line of apsides with the moon. 
+%  This is a course target loop that ensurues the s/c is in the vicinity of the Moon at orbit apogee.  
+%  The RA and DEC contraints are applied in and Earth Moon rotating frame.  The x-axis points from Earth to Moon and
+%  the z-axis is normal to the plane of the lunar orbit about Earth.  In this frame, we RA = 0 and DEC = 0;
+Target 'RAAN and AOP Target' DC1 {SolveMode = Solve, ExitMode = SaveAndContinue, ShowProgressWindow = true};
+   
+   %  Vary parking orbit orientation
+   Vary 'Vary RAAN' DC1(V2.RAAN = 37.81196267857057, {Perturbation = 0.01, Lower = -9.999999e300, Upper = 9.999999e300, MaxStep = 2, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary 'Vary AOP' DC1(V2.AOP = -46.2138151812018, {Perturbation = 0.01, Lower = -9.999999e300, Upper = 9.999999e300, MaxStep = 2, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   
+   %  Apply TOI
+   Maneuver 'Apply TCM' TCM_1(V2);
+   
+   %  Save variables for use in fine targeting loop
+   GMAT 'Save RAAN' RAAN = InitSat.RAAN;
+   GMAT 'Save AOP' AOP = InitSat.AOP;
+   
+   
+   %  Propagate to Apoapsis using point mass earth to avoid potential issues by impacting moon for now.
+   Propagate 'Prop To Jupiter' Interplanetary_Transfer_Prop(V2) {V2.Jupiter.Periapsis};
+   
+   %  Define the constraints that the line of apsides is aligned with moon
+   Achieve 'RA = 0' DC1(V2.EarthJupiterRot.RA = 0, {Tolerance = 0.1});
+   Achieve 'DEC = 0' DC1(V2.EarthJupiterRot.DEC = 0, {Tolerance = 0.1});
+   
+EndTarget;  % For targeter DC1
+
+GMAT 'V2 = InitSat' V2 = InitSat;
+
+%  This loop determines the precise values of RAAN and AOP to acheive desired lunar orbit conditions;
+Optimize 'Optimize TCM_1' Yukon1 {SolveMode = Solve, ExitMode = DiscardAndContinue, ShowProgressWindow = true};
+   Vary 'Vary TCM.V' Yukon1(TCM_1.Element1 = 0.009424674335988134, {Perturbation = 0.1, MaxStep = 5, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary 'Vary TCM.N' Yukon1(TCM_1.Element2 = 0.005810927194078374, {Perturbation = 0.1, MaxStep = 5, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary 'Vary TCM.B' Yukon1(TCM_1.Element3 = -0.0007904470401235212, {Perturbation = 0.1, MaxStep = 5, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Maneuver 'Apply TCM_1' TCM_1(V2);
+   Propagate 'Prop to Jupiter SOI' Interplanetary_Transfer_Prop(V2) {V2.Jupiter.RMAG = 48.2e6, OrbitColor = [255 0 0]};
+   Propagate 'Prop to Periapsis' NearJupiterProp(V2) {V2.Jupiter.Periapsis, OrbitColor = [0 255 0]};
+   NonlinearConstraint 'Contraint BdotT' Yukon1(V2.JupiterInertial.BdotT=1913212.28);
+   NonlinearConstraint 'Contraint BdotR' Yukon1(V2.JupiterInertial.BdotR=167664.27);
+   NonlinearConstraint 'Contraint Time Stamp' Yukon1(V2.A1ModJulian=14064.43680555556);
+   GMAT 'Set Variable DeltaV_TCM_1' DeltaV_TCM_1 = sqrt(TCM_1.Element1^2+TCM_1.Element2^2+TCM_1.Element3^2);
+   Minimize 'Minimize DeltaV_TCM_1' Yukon1(DeltaV_TCM_1);
+EndOptimize;  % For optimizer Yukon1
+Report DefaultReportFile TCM_1.Element1 TCM_1.Element2 TCM_1.Element3 DeltaV_TCM_1;
+
+Optimize 'Optimize TCM_2' Yukon1 {SolveMode = Solve, ExitMode = DiscardAndContinue, ShowProgressWindow = true};
+   Vary 'Vary TCM.V' Yukon1(TCM_2.Element1 = 0.0325113933952792, {Perturbation = 0.001, MaxStep = 0.1, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary 'Vary TCM.N' Yukon1(TCM_2.Element2 = 0.007746007652081217, {Perturbation = 0.001, MaxStep = 0.1, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary 'Vary TCM.B' Yukon1(TCM_2.Element3 = -0.06675668565556811, {Perturbation = 0.001, MaxStep = 0.1, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Maneuver 'Apply TCM_2' TCM_2(V2);
+   Propagate 'Prop to Saturn Periapsis' Interplanetary_Transfer_Prop(V2) {V2.Saturn.Periapsis};
+   NonlinearConstraint 'Contraint BdotT' Yukon1(V2.SaturnInertial.BdotT=324486.32);
+   NonlinearConstraint 'Contraint BdotR' Yukon1(V2.SaturnInertial.BdotR=-173812.23);
+   NonlinearConstraint 'Contraint Time Stamp' Yukon1(V2.A1ModJulian=14842.55625);
+   GMAT 'Set Variable DeltaV_TCM_2' DeltaV_TCM_2 = sqrt(TCM_2.Element1^2+TCM_2.Element2^2+TCM_2.Element3^2);
+   Minimize 'Minimize DeltaV_TCM_2' Yukon1(DeltaV_TCM_2);
+EndOptimize;  % For optimizer Yukon1
+Report DefaultReportFile TCM_2.Element1 TCM_2.Element2 TCM_2.Element3 DeltaV_TCM_2;
+
+Optimize 'Optimize TCM_3' Yukon1 {SolveMode = Solve, ExitMode = DiscardAndContinue, ShowProgressWindow = true};
+   Vary 'Vary TCM.V' Yukon1(TCM_3.Element1 = 0.02971553684026436, {Perturbation = 0.001, MaxStep = 0.1, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary 'Vary TCM.N' Yukon1(TCM_3.Element2 = 0.1589336757331543, {Perturbation = 0.001, MaxStep = 0.1, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary 'Vary TCM.B' Yukon1(TCM_3.Element3 = -0.1636002233493659, {Perturbation = 0.001, MaxStep = 0.1, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Maneuver 'Apply TCM_3' TCM_3(V2);
+   Propagate 'Prop to Uranus Periapsis' Interplanetary_Transfer_Prop(V2) {V2.Uranus.Periapsis};
+   NonlinearConstraint 'Contraint BdotT' Yukon1(V2.UranusInertial.BdotT=92533.50);
+   NonlinearConstraint 'Contraint BdotR' Yukon1(V2.UranusInertial.BdotR=-87205.31);
+   NonlinearConstraint 'Contraint Time Stamp' Yukon1(V2.A1ModJulian=16455.2493056);
+   GMAT 'Set Variable DeltaV_TCM_3' DeltaV_TCM_3 = sqrt(TCM_3.Element1^2+TCM_3.Element2^2+TCM_3.Element3^2);
+   Minimize 'Minimize DeltaV_TCM_3' Yukon1(DeltaV_TCM_3);
+EndOptimize;  % For optimizer Yukon1
+Report DefaultReportFile TCM_3.Element1 TCM_3.Element2 TCM_3.Element3 DeltaV_TCM_3;
+
+Optimize 'Optimize TCM_4' Yukon1 {SolveMode = Solve, ExitMode = DiscardAndContinue, ShowProgressWindow = true};
+   Vary 'Vary TCM.V' Yukon1(TCM_4.Element1 = -0.1050640581377803, {Perturbation = 0.001, MaxStep = 9.999999e300, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary 'Vary TCM.N' Yukon1(TCM_4.Element2 = -0.3455695260625894, {Perturbation = 0.001, MaxStep = 9.999999e300, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary 'Vary TCM.B' Yukon1(TCM_4.Element3 = 0.05899985980749196, {Perturbation = 0.001, MaxStep = 9.999999e300, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Maneuver 'Apply TCM_4' TCM_4(V2);
+   Propagate 'Prop to Neptune Periapsis' Interplanetary_Transfer_Prop(V2) {V2.Neptune.Periapsis};
+   NonlinearConstraint 'Contraint BdotT' Yukon1(V2.NeptuneInertial.BdotT=-27884.25);
+   NonlinearConstraint 'Constraint BdotR' Yukon1(V2.NeptuneInertial.BdotR=-41724.75);
+   NonlinearConstraint 'Constraint Epoch' Yukon1(V2.A1ModJulian=17763.66);
+   GMAT 'Set Variable DeltaV_TCM_4' DeltaV_TCM_4 = sqrt(TCM_4.Element1^2+TCM_4.Element2^2+TCM_4.Element3^2);
+   Minimize 'Minimize DeltaV_TCM_4' Yukon1(DeltaV_TCM_4);
+EndOptimize;  % For optimizer Yukon1
+Report DefaultReportFile TCM_4.Element1 TCM_4.Element2 TCM_4.Element3 DeltaV_TCM_4;
+
+Propagate 'Prop _ days' Interplanetary_Transfer_Prop(V2) {V2.ElapsedDays = 5000};

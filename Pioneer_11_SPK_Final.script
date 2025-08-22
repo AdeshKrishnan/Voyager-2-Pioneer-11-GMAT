@@ -1,0 +1,234 @@
+%General Mission Analysis Tool(GMAT) Script
+%Created: 2025-07-29 20:59:59
+
+
+%----------------------------------------
+%---------- Spacecraft
+%----------------------------------------
+
+Create Spacecraft Pioneer_11;
+GMAT Pioneer_11.DateFormat = TAIModJulian;
+GMAT Pioneer_11.Epoch = '21545';
+GMAT Pioneer_11.CoordinateSystem = EarthMJ2000Eq;
+GMAT Pioneer_11.DisplayStateType = Cartesian;
+GMAT Pioneer_11.X = 7100;
+GMAT Pioneer_11.Y = 0;
+GMAT Pioneer_11.Z = 1300;
+GMAT Pioneer_11.VX = 0;
+GMAT Pioneer_11.VY = 7.35;
+GMAT Pioneer_11.VZ = 1;
+GMAT Pioneer_11.DryMass = 850;
+GMAT Pioneer_11.Cd = 2.2;
+GMAT Pioneer_11.Cr = 1.8;
+GMAT Pioneer_11.DragArea = 15;
+GMAT Pioneer_11.SRPArea = 1;
+GMAT Pioneer_11.SPADDragScaleFactor = 1;
+GMAT Pioneer_11.SPADSRPScaleFactor = 1;
+GMAT Pioneer_11.AtmosDensityScaleFactor = 1;
+GMAT Pioneer_11.ExtendedMassPropertiesModel = 'None';
+GMAT Pioneer_11.NAIFId = -24;
+GMAT Pioneer_11.NAIFIdReferenceFrame = -9002001;
+GMAT Pioneer_11.OrbitSpiceKernelName = {'C:\users\crossover\Documents\GitHub\Voyager2_GMAT\Pioneer_11_SPK.bsp'};
+GMAT Pioneer_11.OrbitColor = Red;
+GMAT Pioneer_11.TargetColor = Teal;
+GMAT Pioneer_11.OrbitErrorCovariance = [ 1e+70 0 0 0 0 0 ; 0 1e+70 0 0 0 0 ; 0 0 1e+70 0 0 0 ; 0 0 0 1e+70 0 0 ; 0 0 0 0 1e+70 0 ; 0 0 0 0 0 1e+70 ];
+GMAT Pioneer_11.CdSigma = 1e+70;
+GMAT Pioneer_11.CrSigma = 1e+70;
+GMAT Pioneer_11.Id = 'SatId';
+GMAT Pioneer_11.Attitude = CoordinateSystemFixed;
+GMAT Pioneer_11.SPADSRPInterpolationMethod = Bilinear;
+GMAT Pioneer_11.SPADSRPScaleFactorSigma = 1e+70;
+GMAT Pioneer_11.SPADDragInterpolationMethod = Bilinear;
+GMAT Pioneer_11.SPADDragScaleFactorSigma = 1e+70;
+GMAT Pioneer_11.AtmosDensityScaleFactorSigma = 1e+70;
+GMAT Pioneer_11.ModelFile = 'aura.3ds';
+GMAT Pioneer_11.ModelOffsetX = 0;
+GMAT Pioneer_11.ModelOffsetY = 0;
+GMAT Pioneer_11.ModelOffsetZ = 0;
+GMAT Pioneer_11.ModelRotationX = 0;
+GMAT Pioneer_11.ModelRotationY = 0;
+GMAT Pioneer_11.ModelRotationZ = 0;
+GMAT Pioneer_11.ModelScale = 1;
+GMAT Pioneer_11.AttitudeDisplayStateType = 'Quaternion';
+GMAT Pioneer_11.AttitudeRateDisplayStateType = 'AngularVelocity';
+GMAT Pioneer_11.AttitudeCoordinateSystem = EarthMJ2000Eq;
+GMAT Pioneer_11.EulerAngleSequence = '321';
+
+%----------------------------------------
+%---------- ForceModels
+%----------------------------------------
+
+Create ForceModel DefaultProp_ForceModel;
+GMAT DefaultProp_ForceModel.CentralBody = Earth;
+GMAT DefaultProp_ForceModel.PrimaryBodies = {Earth};
+GMAT DefaultProp_ForceModel.Drag = None;
+GMAT DefaultProp_ForceModel.SRP = Off;
+GMAT DefaultProp_ForceModel.RelativisticCorrection = Off;
+GMAT DefaultProp_ForceModel.ErrorControl = RSSStep;
+GMAT DefaultProp_ForceModel.GravityField.Earth.Degree = 4;
+GMAT DefaultProp_ForceModel.GravityField.Earth.Order = 4;
+GMAT DefaultProp_ForceModel.GravityField.Earth.StmLimit = 100;
+GMAT DefaultProp_ForceModel.GravityField.Earth.PotentialFile = 'JGM2.cof';
+GMAT DefaultProp_ForceModel.GravityField.Earth.TideModel = 'None';
+
+%----------------------------------------
+%---------- Propagators
+%----------------------------------------
+
+Create Propagator DefaultProp;
+GMAT DefaultProp.Type = SPK;
+GMAT DefaultProp.StepSize = 10000;
+GMAT DefaultProp.CentralBody = Earth;
+GMAT DefaultProp.EpochFormat = 'A1ModJulian';
+GMAT DefaultProp.StartEpoch = 'EphemStart';
+
+%----------------------------------------
+%---------- Coordinate Systems
+%----------------------------------------
+
+Create CoordinateSystem SunMJ2000Eq;
+GMAT SunMJ2000Eq.Origin = Sun;
+GMAT SunMJ2000Eq.Axes = MJ2000Eq;
+
+%----------------------------------------
+%---------- Subscribers
+%----------------------------------------
+
+Create CoordinateSystem SaturnInertial;
+GMAT SaturnInertial.Origin = Saturn;
+GMAT SaturnInertial.Axes = BodyInertial;
+
+Create CoordinateSystem JupiterInertial;
+GMAT JupiterInertial.Origin = Jupiter;
+GMAT JupiterInertial.Axes = BodyInertial;
+
+%----------------------------------------
+%---------- Subscribers
+%----------------------------------------
+
+Create OrbitView DefaultOrbitView;
+GMAT DefaultOrbitView.SolverIterations = Current;
+GMAT DefaultOrbitView.UpperLeft = [ -0.002691790040376851 0.1079404466501241 ];
+GMAT DefaultOrbitView.Size = [ 0.6379542395693136 0.7307692307692307 ];
+GMAT DefaultOrbitView.RelativeZOrder = 182;
+GMAT DefaultOrbitView.Maximized = false;
+GMAT DefaultOrbitView.Add = {Pioneer_11, Earth, Mars, Jupiter, Neptune, Saturn, Uranus, Sun};
+GMAT DefaultOrbitView.CoordinateSystem = SunMJ2000Eq;
+GMAT DefaultOrbitView.DrawObject = [ true true true true true true true true ];
+GMAT DefaultOrbitView.DataCollectFrequency = 1;
+GMAT DefaultOrbitView.UpdatePlotFrequency = 50;
+GMAT DefaultOrbitView.NumPointsToRedraw = 0;
+GMAT DefaultOrbitView.ShowPlot = true;
+GMAT DefaultOrbitView.MaxPlotPoints = 20000;
+GMAT DefaultOrbitView.ShowLabels = true;
+GMAT DefaultOrbitView.ViewPointReference = Sun;
+GMAT DefaultOrbitView.ViewPointVector = Jupiter;
+GMAT DefaultOrbitView.ViewDirection = Sun;
+GMAT DefaultOrbitView.ViewScaleFactor = 1.5;
+GMAT DefaultOrbitView.ViewUpCoordinateSystem = SunMJ2000Eq;
+GMAT DefaultOrbitView.ViewUpAxis = Z;
+GMAT DefaultOrbitView.EclipticPlane = Off;
+GMAT DefaultOrbitView.XYPlane = On;
+GMAT DefaultOrbitView.WireFrame = Off;
+GMAT DefaultOrbitView.Axes = On;
+GMAT DefaultOrbitView.Grid = Off;
+GMAT DefaultOrbitView.SunLine = Off;
+GMAT DefaultOrbitView.UseInitialView = On;
+GMAT DefaultOrbitView.StarCount = 7000;
+GMAT DefaultOrbitView.EnableStars = On;
+GMAT DefaultOrbitView.EnableConstellations = On;
+
+Create OrbitView JupiterInertialView;
+GMAT JupiterInertialView.SolverIterations = Current;
+GMAT JupiterInertialView.UpperLeft = [ 0.6379542395693136 -40.55334987593052 ];
+GMAT JupiterInertialView.Size = [ 0.3492597577388964 0.8709677419354839 ];
+GMAT JupiterInertialView.RelativeZOrder = 147;
+GMAT JupiterInertialView.Maximized = false;
+GMAT JupiterInertialView.Add = {Pioneer_11, Jupiter};
+GMAT JupiterInertialView.CoordinateSystem = JupiterInertial;
+GMAT JupiterInertialView.DrawObject = [ true true ];
+GMAT JupiterInertialView.DataCollectFrequency = 1;
+GMAT JupiterInertialView.UpdatePlotFrequency = 50;
+GMAT JupiterInertialView.NumPointsToRedraw = 0;
+GMAT JupiterInertialView.ShowPlot = true;
+GMAT JupiterInertialView.MaxPlotPoints = 20000;
+GMAT JupiterInertialView.ShowLabels = true;
+GMAT JupiterInertialView.ViewPointReference = Jupiter;
+GMAT JupiterInertialView.ViewPointVector = [ 20000 20000 20000 ];
+GMAT JupiterInertialView.ViewDirection = Jupiter;
+GMAT JupiterInertialView.ViewScaleFactor = 100;
+GMAT JupiterInertialView.ViewUpCoordinateSystem = EarthMJ2000Eq;
+GMAT JupiterInertialView.ViewUpAxis = Z;
+GMAT JupiterInertialView.EclipticPlane = Off;
+GMAT JupiterInertialView.XYPlane = On;
+GMAT JupiterInertialView.WireFrame = Off;
+GMAT JupiterInertialView.Axes = On;
+GMAT JupiterInertialView.Grid = Off;
+GMAT JupiterInertialView.SunLine = Off;
+GMAT JupiterInertialView.UseInitialView = On;
+GMAT JupiterInertialView.StarCount = 7000;
+GMAT JupiterInertialView.EnableStars = On;
+GMAT JupiterInertialView.EnableConstellations = On;
+
+Create OrbitView SaturnIntertialView;
+GMAT SaturnIntertialView.SolverIterations = Current;
+GMAT SaturnIntertialView.UpperLeft = [ 0.6621803499327052 0.03846153846153846 ];
+GMAT SaturnIntertialView.Size = [ 0.3257065948855989 0.7369727047146402 ];
+GMAT SaturnIntertialView.RelativeZOrder = 213;
+GMAT SaturnIntertialView.Maximized = false;
+GMAT SaturnIntertialView.Add = {Pioneer_11, Saturn};
+GMAT SaturnIntertialView.CoordinateSystem = SaturnInertial;
+GMAT SaturnIntertialView.DrawObject = [ true true ];
+GMAT SaturnIntertialView.DataCollectFrequency = 1;
+GMAT SaturnIntertialView.UpdatePlotFrequency = 50;
+GMAT SaturnIntertialView.NumPointsToRedraw = 0;
+GMAT SaturnIntertialView.ShowPlot = true;
+GMAT SaturnIntertialView.MaxPlotPoints = 20000;
+GMAT SaturnIntertialView.ShowLabels = true;
+GMAT SaturnIntertialView.ViewPointReference = Saturn;
+GMAT SaturnIntertialView.ViewPointVector = [ 20000 20000 20000 ];
+GMAT SaturnIntertialView.ViewDirection = Saturn;
+GMAT SaturnIntertialView.ViewScaleFactor = 50;
+GMAT SaturnIntertialView.ViewUpCoordinateSystem = EarthMJ2000Eq;
+GMAT SaturnIntertialView.ViewUpAxis = Z;
+GMAT SaturnIntertialView.EclipticPlane = Off;
+GMAT SaturnIntertialView.XYPlane = On;
+GMAT SaturnIntertialView.WireFrame = Off;
+GMAT SaturnIntertialView.Axes = On;
+GMAT SaturnIntertialView.Grid = Off;
+GMAT SaturnIntertialView.SunLine = Off;
+GMAT SaturnIntertialView.UseInitialView = On;
+GMAT SaturnIntertialView.StarCount = 7000;
+GMAT SaturnIntertialView.EnableStars = On;
+GMAT SaturnIntertialView.EnableConstellations = On;
+
+Create ReportFile ReportFile1;
+GMAT ReportFile1.SolverIterations = Current;
+GMAT ReportFile1.UpperLeft = [ 0 0 ];
+GMAT ReportFile1.Size = [ 0 0 ];
+GMAT ReportFile1.RelativeZOrder = 0;
+GMAT ReportFile1.Maximized = false;
+GMAT ReportFile1.Filename = 'C:\users\crossover\Documents\GitHub\Voyager2_GMAT\Pioneer_11_SPK_ReportFile.txt';
+GMAT ReportFile1.Precision = 16;
+GMAT ReportFile1.WriteHeaders = true;
+GMAT ReportFile1.LeftJustify = On;
+GMAT ReportFile1.ZeroFill = Off;
+GMAT ReportFile1.FixedWidth = true;
+GMAT ReportFile1.Delimiter = ' ';
+GMAT ReportFile1.ColumnWidth = 23;
+GMAT ReportFile1.WriteReport = true;
+
+%----------------------------------------
+%---------- Mission Sequence
+%----------------------------------------
+
+BeginMissionSequence;
+Propagate DefaultProp(Pioneer_11) {Pioneer_11.ElapsedDays = 1};
+Report ReportFile1 Pioneer_11.A1ModJulian Pioneer_11.EarthMJ2000Eq.X Pioneer_11.EarthMJ2000Eq.Y Pioneer_11.EarthMJ2000Eq.Z Pioneer_11.EarthMJ2000Eq.VX Pioneer_11.EarthMJ2000Eq.VY Pioneer_11.EarthMJ2000Eq.VZ;
+Propagate DefaultProp(Pioneer_11) {Pioneer_11.Jupiter.Periapsis};
+Report ReportFile1 Pioneer_11.A1ModJulian Pioneer_11.JupiterInertial.BdotT Pioneer_11.JupiterInertial.BdotR Pioneer_11.Jupiter.RMAG;
+Propagate DefaultProp(Pioneer_11) {Pioneer_11.Saturn.Periapsis};
+Report ReportFile1 Pioneer_11.A1ModJulian Pioneer_11.SaturnInertial.BdotT Pioneer_11.SaturnInertial.BdotR Pioneer_11.Saturn.RMAG;
+
+
+

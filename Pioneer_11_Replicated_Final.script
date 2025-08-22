@@ -1,0 +1,236 @@
+%General Mission Analysis Tool(GMAT) Script
+%Created: 2025-07-29 21:43:46
+
+
+%----------------------------------------
+%---------- Spacecraft
+%----------------------------------------
+
+Create Spacecraft Pioneer_11;
+GMAT Pioneer_11.DateFormat = A1ModJulian;
+GMAT Pioneer_11.Epoch = '11779.60083373126';
+GMAT Pioneer_11.CoordinateSystem = EarthMJ2000Eq;
+GMAT Pioneer_11.DisplayStateType = Cartesian;
+GMAT Pioneer_11.X = 241232.116461418;
+GMAT Pioneer_11.Y = -635386.359545037;
+GMAT Pioneer_11.Z = -472400.4810292983;
+GMAT Pioneer_11.VX = 2.849473634163361;
+GMAT Pioneer_11.VY = -7.185022564191551;
+GMAT Pioneer_11.VZ = -5.370785862344066;
+GMAT Pioneer_11.DryMass = 850;
+GMAT Pioneer_11.Cd = 2.2;
+GMAT Pioneer_11.Cr = 1.8;
+GMAT Pioneer_11.DragArea = 15;
+GMAT Pioneer_11.SRPArea = 1;
+GMAT Pioneer_11.SPADDragScaleFactor = 1;
+GMAT Pioneer_11.SPADSRPScaleFactor = 1;
+GMAT Pioneer_11.AtmosDensityScaleFactor = 1;
+GMAT Pioneer_11.ExtendedMassPropertiesModel = 'None';
+GMAT Pioneer_11.NAIFId = -10011001;
+GMAT Pioneer_11.NAIFIdReferenceFrame = -9011001;
+GMAT Pioneer_11.OrbitColor = Red;
+GMAT Pioneer_11.TargetColor = Teal;
+GMAT Pioneer_11.OrbitErrorCovariance = [ 1e+70 0 0 0 0 0 ; 0 1e+70 0 0 0 0 ; 0 0 1e+70 0 0 0 ; 0 0 0 1e+70 0 0 ; 0 0 0 0 1e+70 0 ; 0 0 0 0 0 1e+70 ];
+GMAT Pioneer_11.CdSigma = 1e+70;
+GMAT Pioneer_11.CrSigma = 1e+70;
+GMAT Pioneer_11.Id = 'SatId';
+GMAT Pioneer_11.Attitude = CoordinateSystemFixed;
+GMAT Pioneer_11.SPADSRPInterpolationMethod = Bilinear;
+GMAT Pioneer_11.SPADSRPScaleFactorSigma = 1e+70;
+GMAT Pioneer_11.SPADDragInterpolationMethod = Bilinear;
+GMAT Pioneer_11.SPADDragScaleFactorSigma = 1e+70;
+GMAT Pioneer_11.AtmosDensityScaleFactorSigma = 1e+70;
+GMAT Pioneer_11.ModelFile = 'aura.3ds';
+GMAT Pioneer_11.ModelOffsetX = 0;
+GMAT Pioneer_11.ModelOffsetY = 0;
+GMAT Pioneer_11.ModelOffsetZ = 0;
+GMAT Pioneer_11.ModelRotationX = 0;
+GMAT Pioneer_11.ModelRotationY = 0;
+GMAT Pioneer_11.ModelRotationZ = 0;
+GMAT Pioneer_11.ModelScale = 1;
+GMAT Pioneer_11.AttitudeDisplayStateType = 'Quaternion';
+GMAT Pioneer_11.AttitudeRateDisplayStateType = 'AngularVelocity';
+GMAT Pioneer_11.AttitudeCoordinateSystem = EarthMJ2000Eq;
+GMAT Pioneer_11.EulerAngleSequence = '321';
+
+
+
+
+%----------------------------------------
+%---------- ForceModels
+%----------------------------------------
+
+Create ForceModel Interplanetary_Transfer_Prop_ForceModel;
+GMAT Interplanetary_Transfer_Prop_ForceModel.CentralBody = Sun;
+GMAT Interplanetary_Transfer_Prop_ForceModel.PointMasses = {Earth, Jupiter, Luna, Mars, Mercury, Neptune, Pluto, Saturn, Sun, Uranus, Venus};
+GMAT Interplanetary_Transfer_Prop_ForceModel.Drag = None;
+GMAT Interplanetary_Transfer_Prop_ForceModel.SRP = On;
+GMAT Interplanetary_Transfer_Prop_ForceModel.RelativisticCorrection = On;
+GMAT Interplanetary_Transfer_Prop_ForceModel.ErrorControl = RSSStep;
+GMAT Interplanetary_Transfer_Prop_ForceModel.SRP.Flux = 1367;
+GMAT Interplanetary_Transfer_Prop_ForceModel.SRP.SRPModel = Spherical;
+GMAT Interplanetary_Transfer_Prop_ForceModel.SRP.Nominal_Sun = 149597870.691;
+
+%----------------------------------------
+%---------- Propagators
+%----------------------------------------
+
+Create Propagator Interplanetary_Transfer_Prop;
+GMAT Interplanetary_Transfer_Prop.FM = Interplanetary_Transfer_Prop_ForceModel;
+GMAT Interplanetary_Transfer_Prop.Type = RungeKutta89;
+GMAT Interplanetary_Transfer_Prop.InitialStepSize = 60;
+GMAT Interplanetary_Transfer_Prop.Accuracy = 9.999999999999999e-12;
+GMAT Interplanetary_Transfer_Prop.MinStep = 0.001;
+GMAT Interplanetary_Transfer_Prop.MaxStep = 160000;
+GMAT Interplanetary_Transfer_Prop.MaxStepAttempts = 50;
+GMAT Interplanetary_Transfer_Prop.StopIfAccuracyIsViolated = true;
+
+%----------------------------------------
+%---------- Burns
+%----------------------------------------
+
+Create ImpulsiveBurn TCM_1;
+GMAT TCM_1.CoordinateSystem = Local;
+GMAT TCM_1.Origin = Earth;
+GMAT TCM_1.Axes = VNB;
+GMAT TCM_1.Element1 = 10;
+GMAT TCM_1.Element2 = 0;
+GMAT TCM_1.Element3 = 0;
+GMAT TCM_1.DecrementMass = false;
+GMAT TCM_1.Isp = 300;
+GMAT TCM_1.GravitationalAccel = 9.81;
+
+Create ImpulsiveBurn TCM_2;
+GMAT TCM_2.CoordinateSystem = Local;
+GMAT TCM_2.Origin = Earth;
+GMAT TCM_2.Axes = VNB;
+GMAT TCM_2.Element1 = 0;
+GMAT TCM_2.Element2 = 0;
+GMAT TCM_2.Element3 = 0;
+GMAT TCM_2.DecrementMass = false;
+GMAT TCM_2.Isp = 300;
+GMAT TCM_2.GravitationalAccel = 9.81;
+
+%----------------------------------------
+%---------- Coordinate Systems
+%----------------------------------------
+Create CoordinateSystem SunMJ2000Eq;
+GMAT SunMJ2000Eq.Origin = Sun;
+GMAT SunMJ2000Eq.Axes = MJ2000Eq;
+
+Create CoordinateSystem SaturnInertial;
+GMAT SaturnInertial.Origin = Saturn;
+GMAT SaturnInertial.Axes = BodyInertial;
+
+Create CoordinateSystem JupiterInertial;
+GMAT JupiterInertial.Origin = Jupiter;
+GMAT JupiterInertial.Axes = BodyInertial;
+
+%----------------------------------------
+%---------- Solvers
+%----------------------------------------
+
+Create DifferentialCorrector DC1;
+GMAT DC1.ShowProgress = true;
+GMAT DC1.ReportStyle = Normal;
+GMAT DC1.ReportFile = 'DifferentialCorrectorDC1.data';
+GMAT DC1.MaximumIterations = 500;
+GMAT DC1.DerivativeMethod = ForwardDifference;
+GMAT DC1.Algorithm = NewtonRaphson;
+
+%----------------------------------------
+%---------- Subscribers
+%----------------------------------------
+
+Create OrbitView DefaultOrbitView;
+GMAT DefaultOrbitView.SolverIterations = Current;
+GMAT DefaultOrbitView.UpperLeft = [ 0.3243606998654105 0.3362282878411911 ];
+GMAT DefaultOrbitView.Size = [ 0.6379542395693136 0.7307692307692307 ];
+GMAT DefaultOrbitView.RelativeZOrder = 511;
+GMAT DefaultOrbitView.Maximized = false;
+GMAT DefaultOrbitView.Add = {Pioneer_11, Earth, Mars, Jupiter, Neptune, Saturn, Uranus, Sun};
+GMAT DefaultOrbitView.CoordinateSystem = SunMJ2000Eq;
+GMAT DefaultOrbitView.DrawObject = [ true true true true true true true true ];
+GMAT DefaultOrbitView.DataCollectFrequency = 1;
+GMAT DefaultOrbitView.UpdatePlotFrequency = 50;
+GMAT DefaultOrbitView.NumPointsToRedraw = 0;
+GMAT DefaultOrbitView.ShowPlot = true;
+GMAT DefaultOrbitView.MaxPlotPoints = 20000;
+GMAT DefaultOrbitView.ShowLabels = true;
+GMAT DefaultOrbitView.ViewPointReference = Sun;
+GMAT DefaultOrbitView.ViewPointVector = Jupiter;
+GMAT DefaultOrbitView.ViewDirection = Sun;
+GMAT DefaultOrbitView.ViewScaleFactor = 1.5;
+GMAT DefaultOrbitView.ViewUpCoordinateSystem = SunMJ2000Eq;
+GMAT DefaultOrbitView.ViewUpAxis = Z;
+GMAT DefaultOrbitView.EclipticPlane = Off;
+GMAT DefaultOrbitView.XYPlane = On;
+GMAT DefaultOrbitView.WireFrame = Off;
+GMAT DefaultOrbitView.Axes = On;
+GMAT DefaultOrbitView.Grid = Off;
+GMAT DefaultOrbitView.SunLine = Off;
+GMAT DefaultOrbitView.UseInitialView = On;
+GMAT DefaultOrbitView.StarCount = 7000;
+GMAT DefaultOrbitView.EnableStars = On;
+GMAT DefaultOrbitView.EnableConstellations = On;
+
+Create ReportFile DefaultReportFile;
+GMAT DefaultReportFile.SolverIterations = Current;
+GMAT DefaultReportFile.UpperLeft = [ 0 0 ];
+GMAT DefaultReportFile.Size = [ 0 0 ];
+GMAT DefaultReportFile.RelativeZOrder = 0;
+GMAT DefaultReportFile.Maximized = false;
+GMAT DefaultReportFile.Filename = 'C:\users\crossover\Documents\GitHub\Voyager2_GMAT\Pioneer_11_Replicated_ReportFile.txt';
+GMAT DefaultReportFile.Precision = 16;
+GMAT DefaultReportFile.WriteHeaders = true;
+GMAT DefaultReportFile.LeftJustify = On;
+GMAT DefaultReportFile.ZeroFill = Off;
+GMAT DefaultReportFile.FixedWidth = true;
+GMAT DefaultReportFile.Delimiter = ' ';
+GMAT DefaultReportFile.ColumnWidth = 23;
+GMAT DefaultReportFile.WriteReport = true;
+
+%----------------------------------------
+%---------- Arrays, Variables, Strings
+%----------------------------------------
+Create Variable DeltaV_TCM_1 DeltaV_TCM_2 DeltaV_TCM_3 DeltaV_TCM_4;
+GMAT DeltaV_TCM_1 = 0;
+GMAT DeltaV_TCM_2 = 0;
+GMAT DeltaV_TCM_3 = 0;
+GMAT DeltaV_TCM_4 = 0;
+
+
+
+
+%----------------------------------------
+%---------- Mission Sequence
+%----------------------------------------
+
+BeginMissionSequence;
+Propagate Interplanetary_Transfer_Prop(Pioneer_11) {Pioneer_11.ElapsedDays = 1};
+
+Target 'TCM_1 Target' DC1 {SolveMode = Solve, ExitMode = DiscardAndContinue, ShowProgressWindow = true};
+   Vary 'Vary TCM.V' DC1(TCM_1.Element1 = 0.04344930960787912, {Perturbation = 0.1, Lower = -10e300, Upper = 10e300, MaxStep = 5, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary 'Vary TCM.N' DC1(TCM_1.Element2 = -0.01372385140984747, {Perturbation = 0.1, Lower = -10e300, Upper = 10e300, MaxStep = 5, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary 'Vary TCM.B' DC1(TCM_1.Element3 = -0.01796780529802405, {Perturbation = 0.1, Lower = -10e300, Upper = 10e300, MaxStep = 5, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Maneuver 'Apply TCM_1' TCM_1(Pioneer_11);
+   Propagate 'Prop to Periapsis' Interplanetary_Transfer_Prop(Pioneer_11) {Pioneer_11.Jupiter.Periapsis, OrbitColor = [0 255 0]};
+   Achieve 'Achieve BdotT' DC1(Pioneer_11.JupiterInertial.BdotT = -371218.7158733155, {Tolerance = 0.001});
+   Achieve 'Achieve BdotR' DC1(Pioneer_11.JupiterInertial.BdotR = 473675.4555565082, {Tolerance = 0.001});
+   Achieve 'Achieve Time Stamp' DC1(Pioneer_11.A1ModJulian = 12384.72337193078, {Tolerance = 0.001});
+   GMAT 'Set Variable DeltaV_TCM_1' DeltaV_TCM_1 = sqrt(TCM_1.Element1^2+TCM_1.Element2^2+TCM_1.Element3^2);
+EndTarget;  % For targeter DC1
+Report DefaultReportFile TCM_1.Element1 TCM_1.Element2 TCM_1.Element3 DeltaV_TCM_1;
+
+Target 'TCM_2 Target' DC1 {SolveMode = Solve, ExitMode = DiscardAndContinue, ShowProgressWindow = true};
+   Vary 'Vary TCM.V' DC1(TCM_2.Element1 = -0.9587716753922719, {Perturbation = 0.1, Lower = -10e300, Upper = 10e300, MaxStep = 5, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary 'Vary TCM.N' DC1(TCM_2.Element2 = 2.142304302509557, {Perturbation = 0.1, Lower = -10e300, Upper = 10e300, MaxStep = 5, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary 'Vary TCM.B' DC1(TCM_2.Element3 = -0.266285549465796, {Perturbation = 0.1, Lower = -10e300, Upper = 10e300, MaxStep = 5, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Maneuver 'Apply TCM_2' TCM_2(Pioneer_11);
+   Propagate 'Prop to Periapsis' Interplanetary_Transfer_Prop(Pioneer_11) {Pioneer_11.Saturn.Periapsis, OrbitColor = [0 255 0]};
+   Achieve 'Achieve BdotT' DC1(Pioneer_11.SaturnInertial.BdotT = 335609.2876167792, {Tolerance = 0.01});
+   Achieve 'Achieve BdotR' DC1(Pioneer_11.SaturnInertial.BdotR = 19526.29306537029, {Tolerance = 0.01});
+   Achieve 'Achieve Time Stamp' DC1(Pioneer_11.A1ModJulian = 14118.18689267082, {Tolerance = 0.001});
+   GMAT 'Set Variable DeltaV_TCM_2' DeltaV_TCM_2 = sqrt(TCM_2.Element1^2+TCM_2.Element2^2+TCM_2.Element3^2);
+EndTarget;  % For targeter DC1
+Report DefaultReportFile TCM_2.Element1 TCM_2.Element2 TCM_2.Element3 DeltaV_TCM_2;
