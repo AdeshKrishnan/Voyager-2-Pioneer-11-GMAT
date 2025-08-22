@@ -1,0 +1,6 @@
+Pioneer_11.A1ModJulian    Pioneer_11.EarthMJ2000Eq.X   Pioneer_11.EarthMJ2000Eq.Y   Pioneer_11.EarthMJ2000Eq.Z   Pioneer_11.EarthMJ2000Eq.VX   Pioneer_11.EarthMJ2000Eq.VY   Pioneer_11.EarthMJ2000Eq.VZ   
+11779.60083373126         241232.116461418             -635386.359545037            -472400.4810292983           2.849473634163361             -7.185022564191551            -5.370785862344066            
+Pioneer_11.A1ModJulian    Pioneer_11.JupiterInertial.BdotT   Pioneer_11.JupiterInertial.BdotR   Pioneer_11.Jupiter.RMAG   
+12384.72337193078         -371218.7158733155                 473675.4555565082                  113517.4534577959         
+Pioneer_11.A1ModJulian    Pioneer_11.SaturnInertial.BdotT   Pioneer_11.SaturnInertial.BdotR   Pioneer_11.Saturn.RMAG    
+14118.18689267083         335609.2876036905                 19526.29306465149                 79445.2581020135          

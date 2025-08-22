@@ -1,0 +1,2 @@
+Voyager2.A1ModJulian      Voyager2.JupiterInertial.BdotT   Voyager2.JupiterInertial.BdotR   Voyager2.Jupiter.RMAG     
+14064.43694729334         1913212.282106901                167664.2764100814                720841.1090199768         

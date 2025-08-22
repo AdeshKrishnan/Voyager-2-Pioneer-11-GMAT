@@ -28,7 +28,7 @@ GMAT Pioneer_11.AtmosDensityScaleFactor = 1;
 GMAT Pioneer_11.ExtendedMassPropertiesModel = 'None';
 GMAT Pioneer_11.NAIFId = -24;
 GMAT Pioneer_11.NAIFIdReferenceFrame = -9002001;
-GMAT Pioneer_11.OrbitSpiceKernelName = {'C:\users\crossover\Documents\GitHub\Voyager-2-Pioneer-11-GMAT\Pioneer_11_SPK_File.bsp'};
+GMAT Pioneer_11.OrbitSpiceKernelName = {'C:\users\crossover\Documents\GitHub\Voyager2_GMAT\Pioneer_11_SPK.bsp'};
 GMAT Pioneer_11.OrbitColor = Red;
 GMAT Pioneer_11.TargetColor = Teal;
 GMAT Pioneer_11.OrbitErrorCovariance = [ 1e+70 0 0 0 0 0 ; 0 1e+70 0 0 0 0 ; 0 0 1e+70 0 0 0 ; 0 0 0 1e+70 0 0 ; 0 0 0 0 1e+70 0 ; 0 0 0 0 0 1e+70 ];
@@ -208,7 +208,7 @@ GMAT ReportFile1.UpperLeft = [ 0 0 ];
 GMAT ReportFile1.Size = [ 0 0 ];
 GMAT ReportFile1.RelativeZOrder = 0;
 GMAT ReportFile1.Maximized = false;
-GMAT ReportFile1.Filename = 'C:\users\crossover\Documents\GitHub\Voyager-2-Pioneer-11-GMAT\Pioneer11_SPK_ReportFile.txt';
+GMAT ReportFile1.Filename = 'C:\users\crossover\Documents\GitHub\Voyager2_GMAT\Pioneer_11_SPK_ReportFile.txt';
 GMAT ReportFile1.Precision = 16;
 GMAT ReportFile1.WriteHeaders = true;
 GMAT ReportFile1.LeftJustify = On;
@@ -229,7 +229,6 @@ Propagate DefaultProp(Pioneer_11) {Pioneer_11.Jupiter.Periapsis};
 Report ReportFile1 Pioneer_11.A1ModJulian Pioneer_11.JupiterInertial.BdotT Pioneer_11.JupiterInertial.BdotR Pioneer_11.Jupiter.RMAG;
 Propagate DefaultProp(Pioneer_11) {Pioneer_11.Saturn.Periapsis};
 Report ReportFile1 Pioneer_11.A1ModJulian Pioneer_11.SaturnInertial.BdotT Pioneer_11.SaturnInertial.BdotR Pioneer_11.Saturn.RMAG;
-
 
 
 

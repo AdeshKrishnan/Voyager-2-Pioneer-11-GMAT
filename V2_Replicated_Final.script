@@ -152,17 +152,6 @@ GMAT NearSaturn_ForceModel.SRP.Nominal_Sun = 149597870.691;
 %---------- ForceModels
 %----------------------------------------
 
-Create ForceModel NearJupiterProp_ForceModel;
-GMAT NearJupiterProp_ForceModel.CentralBody = Jupiter;
-GMAT NearJupiterProp_ForceModel.PointMasses = {Earth, Jupiter, Luna, Mars, Mercury, Neptune, Pluto, Saturn, Sun, Uranus, Venus};
-GMAT NearJupiterProp_ForceModel.Drag = None;
-GMAT NearJupiterProp_ForceModel.SRP = On;
-GMAT NearJupiterProp_ForceModel.RelativisticCorrection = Off;
-GMAT NearJupiterProp_ForceModel.ErrorControl = RSSStep;
-GMAT NearJupiterProp_ForceModel.SRP.Flux = 1367;
-GMAT NearJupiterProp_ForceModel.SRP.SRPModel = Spherical;
-GMAT NearJupiterProp_ForceModel.SRP.Nominal_Sun = 149597870.691;
-
 Create ForceModel Interplanetary_Transfer_Prop_ForceModel;
 GMAT Interplanetary_Transfer_Prop_ForceModel.CentralBody = Sun;
 GMAT Interplanetary_Transfer_Prop_ForceModel.PointMasses = {Earth, Jupiter, Luna, Mars, Mercury, Neptune, Pluto, Saturn, Sun, Uranus, Venus};
@@ -191,16 +180,6 @@ GMAT NearEarth_ForceModel.GravityField.Earth.TideModel = 'None';
 %----------------------------------------
 %---------- Propagators
 %----------------------------------------
-
-Create Propagator NearJupiterProp;
-GMAT NearJupiterProp.FM = NearJupiterProp_ForceModel;
-GMAT NearJupiterProp.Type = RungeKutta89;
-GMAT NearJupiterProp.InitialStepSize = 60;
-GMAT NearJupiterProp.Accuracy = 9.999999999999999e-12;
-GMAT NearJupiterProp.MinStep = 0.001;
-GMAT NearJupiterProp.MaxStep = 864000;
-GMAT NearJupiterProp.MaxStepAttempts = 50;
-GMAT NearJupiterProp.StopIfAccuracyIsViolated = true;
 
 Create Propagator Interplanetary_Transfer_Prop;
 GMAT Interplanetary_Transfer_Prop.FM = Interplanetary_Transfer_Prop_ForceModel;
@@ -432,7 +411,7 @@ GMAT DefaultReportFile.UpperLeft = [ 0 0 ];
 GMAT DefaultReportFile.Size = [ 0 0 ];
 GMAT DefaultReportFile.RelativeZOrder = 0;
 GMAT DefaultReportFile.Maximized = false;
-GMAT DefaultReportFile.Filename = 'C:\users\crossover\Documents\GitHub\Voyager2_GMAT\deltaVreportfile_replicated.txt';
+GMAT DefaultReportFile.Filename = 'C:\users\crossover\Documents\GitHub\Voyager-2-Pioneer-11-GMAT\V2_deltaVreportfile_replicated.txt';
 GMAT DefaultReportFile.Precision = 16;
 GMAT DefaultReportFile.WriteHeaders = true;
 GMAT DefaultReportFile.LeftJustify = On;
@@ -493,28 +472,12 @@ GMAT DeltaV_TCM_4 = 0;
 %----------------------------------------
 BeginMissionSequence;
 
-GMAT InitSat = V2;
-
-Target 'RAAN and AOP Target' DC1 {SolveMode = Solve, ExitMode = SaveAndContinue, ShowProgressWindow = true};
-   Vary 'Vary RAAN' DC1(V2.RAAN = 37.81196267857057, {Perturbation = 0.01, Lower = -9.999999e300, Upper = 9.999999e300, MaxStep = 2, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
-   Vary 'Vary AOP' DC1(V2.AOP = -46.2138151812018, {Perturbation = 0.01, Lower = -9.999999e300, Upper = 9.999999e300, MaxStep = 2, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
-   Maneuver 'Apply TCM' TCM_1(V2);
-   GMAT 'Save RAAN' RAAN = InitSat.RAAN;
-   GMAT 'Save AOP' AOP = InitSat.AOP;
-   Propagate 'Prop To Jupiter' Interplanetary_Transfer_Prop(V2) {V2.Jupiter.Periapsis};
-   Achieve 'RA = 0' DC1(V2.EarthJupiterRot.RA = 0, {Tolerance = 0.001});
-   Achieve 'DEC = 0' DC1(V2.EarthJupiterRot.DEC = 0, {Tolerance = 0.001});
-EndTarget;  % For targeter DC1
-
-GMAT 'Equation2' V2 = InitSat;
-
 Target 'Target Jupiter B-Plane' DC1 {SolveMode = Solve, ExitMode = DiscardAndContinue, ShowProgressWindow = true};
    Vary 'Vary TCM.V' DC1(TCM_1.Element1 = 0.009423748991611138, {Perturbation = 0.1, Lower = -10e300, Upper = 10e300, MaxStep = 5, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
    Vary 'Vary TCM.N' DC1(TCM_1.Element2 = 0.005809857541499038, {Perturbation = 0.1, Lower = -10e300, Upper = 10e300, MaxStep = 5, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
    Vary 'Vary TCM.B' DC1(TCM_1.Element3 = -0.0007902910481075566, {Perturbation = 0.1, Lower = -10e300, Upper = 10e300, MaxStep = 5, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
    Maneuver 'Apply TCM_1' TCM_1(V2);
-   Propagate 'Prop to Jupiter SOI' Interplanetary_Transfer_Prop(V2) {V2.Jupiter.RMAG = 48.2e6, OrbitColor = [255 0 0]};
-   Propagate 'Prop to Periapsis' NearJupiterProp(V2) {V2.Jupiter.Periapsis, OrbitColor = [0 255 0]};
+   Propagate 'Prop to Periapsis' Interplanetary_Transfer_Prop(V2) {V2.Jupiter.Periapsis};
    Achieve 'Achieve BdotT' DC1(V2.JupiterInertial.BdotT = 1913212.28, {Tolerance = 0.001});
    Achieve 'Achieve BdotR' DC1(V2.JupiterInertial.BdotR = 167664.27, {Tolerance = 0.001});
    Achieve 'Achieve Time Stamp' DC1(V2.A1ModJulian = 14064.43680555556, {Tolerance = 0.001});
